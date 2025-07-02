@@ -1,0 +1,48 @@
+.order-notification-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.order-event-card {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.order-event-card .ant-card-head {
+  padding: 0 12px;
+}
+
+.order-event-card .ant-card-body {
+  padding: 12px;
+}
+
+.order-event-card p {
+  margin-bottom: 8px;
+}
+
+.order-event-card p:last-child {
+  margin-bottom: 0;
+}

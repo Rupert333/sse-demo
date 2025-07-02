@@ -1,3 +1,20 @@
 spring:
-  config:
-    name: application
+  redis:
+    host: 192.168.1.225
+    port: 39902
+    password: W83BY*6V1LwaptvhzTN!K3MMDU
+    database: 21
+
+
+# SSE配置
+sse:
+  timeout: 60000
+  heartbeat-interval: 10000
+  heartbeat-enabled: true
+  heartbeat-message: ping
+  controller-enabled: true
+
+logging:
+  level:
+    com.block.sse.starter: DEBUG
+    com.example.sse: DEBUG
