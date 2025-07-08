@@ -33,12 +33,12 @@ WebSocket提供了全双工通信能力，允许客户端和服务器之间进�
 本项目采用前后端分离架构，目录结构如下：
 
 - `src/main/java/com/example/ssebackend/`：Spring Boot 后端源码
-  - `rest/`：REST API 控制器
-  - `service/`：业务服务（如SSE连接管理、订单回调处理等）
+    - `rest/`：REST API 控制器
+    - `service/`：业务服务（如SSE连接管理、订单回调处理等）
 - `src/main/resources/`：后端配置文件
 - `frontend/`：React前端源码
-  - `src/components/OrderNotification.js`：SSE客户端核心组件
-  - `public/`、`src/`：前端静态资源与入口
+    - `src/components/OrderNotification.js`：SSE客户端核心组件
+    - `public/`、`src/`：前端静态资源与入口
 
 
 
@@ -54,11 +54,11 @@ WebSocket提供了全双工通信能力，允许客户端和服务器之间进�
 
    核心的SSE实现在`ISseEmitterService`服务类中。该类负责管理所有客户端的SSE连接，并提供如下主要功能：
 
-   - 使用`ConcurrentHashMap`存储所有的SSE连接，确保线程安全
-   - `createEmitter`方法用于创建新的SSE连接，设置1小时的超时时间
-   - `sendToClient`方法用于向指定客户端发送事件
-   - `broadcastToAll`方法用于向所有客户端广播事件
-   - `sendHeartbeat`方法实现心跳机制，保持连接活跃
+    - 使用`ConcurrentHashMap`存储所有的SSE连接，确保线程安全
+    - `createEmitter`方法用于创建新的SSE连接，设置1小时的超时时间
+    - `sendToClient`方法用于向指定客户端发送事件
+    - `broadcastToAll`方法用于向所有客户端广播事件
+    - `sendHeartbeat`方法实现心跳机制，保持连接活跃
 
    关键代码片段示例：
 
@@ -79,10 +79,10 @@ WebSocket提供了全双工通信能力，允许客户端和服务器之间进�
 4. **RESTful API端点**
 
    在`SseController`控制器类中，提供了以下RESTful API端点：
-   - `/api/sse/connect` - 建立SSE连接，支持可选的clientId参数
-   - `/api/order/callback` - 接收订单回调
-   - `/api/order/simulate` - 模拟订单回调
-   - `/api/sse/status` - 获取SSE连接状态
+    - `/api/sse/connect` - 建立SSE连接，支持可选的clientId参数
+    - `/api/order/callback` - 接收订单回调
+    - `/api/order/simulate` - 模拟订单回调
+    - `/api/sse/status` - 获取SSE连接状态
 
    所有API端点都通过`@CrossOrigin`注解支持跨域请求，但在生产环境中应该限制为特定域名。
 
@@ -91,25 +91,25 @@ WebSocket提供了全双工通信能力，允许客户端和服务器之间进�
 在React前端，我们创建了一个`OrderNotification`组件，实现了完整的SSE客户端功能：
 
 1. **状态管理**：
-   - `orderEvents` - 存储接收到的订单事件
-   - `connected` - 跟踪SSE连接状态
-   - `loading` - 控制加载状态显示
-   - `lastHeartbeat` - 记录最后一次心跳时间
-   - `reconnectTimer` - 管理重连定时器
-   - `sseRef` - 使用useRef保存EventSource实例
+    - `orderEvents` - 存储接收到的订单事件
+    - `connected` - 跟踪SSE连接状态
+    - `loading` - 控制加载状态显示
+    - `lastHeartbeat` - 记录最后一次心跳时间
+    - `reconnectTimer` - 管理重连定时器
+    - `sseRef` - 使用useRef保存EventSource实例
 
 2. **事件监听处理**：
-   - `CONNECT` - 处理连接建立事件
-   - `HEARTBEAT` - 处理心跳消息，更新最后心跳时间
-   - `ORDER_UPDATE` - 处理订单更新事件，解析数据并更新UI
-   - `error` - 处理连接错误，支持自动重连
+    - `CONNECT` - 处理连接建立事件
+    - `HEARTBEAT` - 处理心跳消息，更新最后心跳时间
+    - `ORDER_UPDATE` - 处理订单更新事件，解析数据并更新UI
+    - `error` - 处理连接错误，支持自动重连
 
 3. **核心功能实现**：
-   - `connectSSE` - 建立SSE连接，自动处理重连逻辑
-   - `disconnectSSE` - 安全地关闭SSE连接
-   - `simulateOrderCallback` - 触发模拟订单回调测试
-   - `getStatusColor` - 根据订单状态返回对应的标签颜色
-   - `formatTimestamp` - 格式化时间戳显示
+    - `connectSSE` - 建立SSE连接，自动处理重连逻辑
+    - `disconnectSSE` - 安全地关闭SSE连接
+    - `simulateOrderCallback` - 触发模拟订单回调测试
+    - `getStatusColor` - 根据订单状态返回对应的标签颜色
+    - `formatTimestamp` - 格式化时间戳显示
 
    关键代码片段示例：
 
@@ -128,53 +128,53 @@ WebSocket提供了全双工通信能力，允许客户端和服务器之间进�
 
 5. **UI实现**：
    使用Ant Design组件库创建了一个功能完整的界面：
-   - 显示连接状态和最后心跳时间
-   - 提供连接/断开连接按钮
-   - 支持模拟订单回调测试
-   - 使用List组件展示订单更新历史
-   - 通过Tag组件用不同颜色标识订单状态
-   - 支持空状态显示
+    - 显示连接状态和最后心跳时间
+    - 提供连接/断开连接按钮
+    - 支持模拟订单回调测试
+    - 使用List组件展示订单更新历史
+    - 通过Tag组件用不同颜色标识订单状态
+    - 支持空状态显示
 
 所有的状态更新和事件处理都经过优化，确保了组件的性能和可靠性。错误处理和状态管理都经过完善，提供了良好的用户体验。
 
 ## 4. SSE调试与常见问题
 
 1. **如何调试SSE连接？**
-   - 在浏览器开发者工具的Network面板，找到SSE请求（通常为`event-stream`类型），可实时查看服务器推送的数据。
-   - 可通过curl等工具模拟SSE客户端：
-     ```bash
-     curl -H "Accept: text/event-stream" http://localhost:8080/api/sse/connect/{clientId}
-     ```
+    - 在浏览器开发者工具的Network面板，找到SSE请求（通常为`event-stream`类型），可实时查看服务器推送的数据。
+    - 可通过curl等工具模拟SSE客户端：
+      ```bash
+      curl -H "Accept: text/event-stream" http://localhost:8080/api/sse/connect/{clientId}
+      ```
 
 2. **Nginx/代理配置注意事项**
-   - 需确保`proxy_set_header Connection '';`，并设置足够长的`proxy_read_timeout`，防止连接被中间件过早关闭。
-   - 示例：
-     ```nginx
-     location /api/sse/ {
-       proxy_pass http://localhost:8080;
-       proxy_set_header Connection '';
-       proxy_buffering off;
-       proxy_read_timeout 3600s;
-     }
-     ```
+    - 需确保`proxy_set_header Connection '';`，并设置足够长的`proxy_read_timeout`，防止连接被中间件过早关闭。
+    - 示例：
+      ```nginx
+      location /api/sse/ {
+        proxy_pass http://localhost:8080;
+        proxy_set_header Connection '';
+        proxy_buffering off;
+        proxy_read_timeout 3600s;
+      }
+      ```
 
 3. **断线重连与消息丢失**
-   - SSE原生支持自动重连，前端可监听`onerror`事件并适当提示用户。
-   - 若需保证消息不丢失，可结合`Last-Event-ID`机制实现断点续传。
+    - SSE原生支持自动重连，前端可监听`onerror`事件并适当提示用户。
+    - 若需保证消息不丢失，可结合`Last-Event-ID`机制实现断点续传。
 
 4. **浏览器兼容性问题**
-   - IE不原生支持SSE，可使用polyfill（如event-source-polyfill）。
-   - 移动端主流浏览器基本支持。
+    - IE不原生支持SSE，可使用polyfill（如event-source-polyfill）。
+    - 移动端主流浏览器基本支持。
 
 ## 5. SSE适用场景总结
 
 - **适合场景**：
-  - 实时通知（如订单状态、系统消息、新闻推送等）
-  - 只需服务器单向推送的场景
-  - 对代理、防火墙兼容性要求高的场景
+    - 实时通知（如订单状态、系统消息、新闻推送等）
+    - 只需服务器单向推送的场景
+    - 对代理、防火墙兼容性要求高的场景
 
 - **不适合场景**：
-  - 需要高频双向通信（如IM、协作编辑、在线游戏等）
-  - 需兼容IE等不支持SSE的浏览器
+    - 需要高频双向通信（如IM、协作编辑、在线游戏等）
+    - 需兼容IE等不支持SSE的浏览器
 
 ---
