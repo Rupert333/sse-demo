@@ -9,10 +9,7 @@ spring:
 # SSE配置
 sse:
   timeout: 60000
-  heartbeat-interval: 10000
-  heartbeat-enabled: true
-  heartbeat-message: ping
-  controller-enabled: true
+  heartbeatInterval: 30000
 
 logging:
   level:
