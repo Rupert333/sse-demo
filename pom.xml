@@ -44,6 +44,12 @@
             <artifactId>sse-spring-boot-starter</artifactId>
             <version>1.2.0</version>
         </dependency>
+        <!--idgenerator-->
+        <dependency>
+            <groupId>com.block</groupId>
+            <artifactId>idgenerator-spring-boot-starter</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
