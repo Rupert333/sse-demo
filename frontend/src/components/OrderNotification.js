@@ -5,7 +5,7 @@ import {Card, List, Tag, Button, message, Typography, Spin, Divider} from 'antd'
 const {Title, Text} = Typography;
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 // 客户端ID，用于标识SSE连接
-const clientId = `client-121113`;
+const clientId = `client-121113${Math.random()}`;
 
 /**
  * 订单通知组件
@@ -120,6 +120,22 @@ const OrderNotification = () => {
    */
   const disconnectSSE = useCallback(async () => {
     if (sseRef.current) {
+
+      // 通知后端关闭连接
+      try {
+        const response = await fetch(`${apiUrl}/sse/close/${clientId}`, {
+          method: 'GET',
+        });
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('通知后端关闭连接失败:', errorText);
+          message.error(`通知后端关闭连接失败: ${errorText}`);
+        }
+      } catch (error) {
+        console.error('请求后端关闭连接时出错:', error);
+        message.error('请求后端关闭连接时出错');
+      }
+
       sseRef.current.close();
       sseRef.current = null;
       sseRef.current?.removeEventListener();

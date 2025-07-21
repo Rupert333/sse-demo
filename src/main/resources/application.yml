@@ -3,7 +3,7 @@ spring:
     host: 192.168.1.225
     port: 39902
     password: W83BY*6V1LwaptvhzTN!K3MMDU
-    database: 21
+    database: 8
 
 
 # SSE配置
